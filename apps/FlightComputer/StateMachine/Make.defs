@@ -1,0 +1,5 @@
+ifneq ($(CONFIG_FLIGHTCOMPUTER_STATEMACHINE),)
+
+CONFIGURED_APPS += $(APPDIR)/FlightComputer/StateMachine
+
+endif

@@ -1,0 +1,37 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+menuconfig RPTUN
+	bool "Remote Proc Tunnel Driver Support"
+	default n
+	select RPMSG
+	---help---
+		RPTUN driver is used for multi-cores' communication.
+
+if RPTUN
+
+config RPTUN_PRIORITY
+	int "rptun thread priority"
+	default 224
+
+config RPTUN_STACKSIZE
+	int "rptun stack size"
+	default 4096
+
+config RPTUN_LOADER
+	bool "rptun loader support"
+	default n
+
+config RPTUN_PM
+	bool "rptun power management"
+	depends on PM
+	default n
+	---help---
+		If TX/RX buffer is supplied and powered by each CPU.
+		And when one CPU in DEEP sleep, then it's buffer will
+		goto RAM-retention mode, can't access from another CPU.
+		So, we provide this method to resolve this.
+
+endif # RPTUN

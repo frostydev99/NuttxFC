@@ -1,0 +1,24 @@
+config FLIGHTCOMPUTER_STATEMACHINE
+        tristate "Flight Computer State Machine"
+        default n
+        ---help---
+                Enable the Flight Computer
+
+if FLIGHTCOMPUTER_STATEMACHINE
+
+config FLIGHTCOMPUTER_STATEMACHINE_PROGNAME
+        string "Program name"
+        default "FC_StateMachine"
+        ---help---
+                This is the name of the program that will be used when the NSH ELF
+                program is installed.
+
+config FLIGHTCOMPUTER_STATEMACHINE_PRIORITY
+        int "State Machine task priority"
+        default 100
+
+config FLIGHTCOMPUTER_STATEMACHINE_STACKSIZE
+        int "State Machine stack size"
+        default DEFAULT_TASK_STACKSIZE
+
+endif
