@@ -38,6 +38,7 @@ Make.dep
 # nuttx/$(TOPDIR)/Makefile.[unix|win]::$(DIRLINKS_EXTERNAL_DIRS)
 .dirlinks
 .vscode
+.idea
 .DS_Store
 build
 .ccls-cache
