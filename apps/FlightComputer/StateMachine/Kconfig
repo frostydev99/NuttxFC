@@ -19,6 +19,6 @@ config FLIGHTCOMPUTER_STATEMACHINE_PRIORITY
 
 config FLIGHTCOMPUTER_STATEMACHINE_STACKSIZE
         int "State Machine stack size"
-        default DEFAULT_TASK_STACKSIZE
+        default 2048
 
 endif

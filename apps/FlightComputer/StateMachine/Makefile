@@ -9,11 +9,18 @@ MODULE = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE)
 
 MAINSRC = StateMachine.cxx
 
-# Include LPS25 and build
-SENSORSSRC = sensors/LPS25/LPS25.cxx
-SENSORSDIR = $(APPDIR)/FlightComputer/StateMachine/sensors/LPS25
-CXXSRCS += $(SENSORSSRC)
-VPATH += $(SENSORSDIR)
+# Include Sensors and Build
+SENSORSRC = sensors/LPS25/LPS25.cxx
+MMCSRC = sensors/MMC5983MA/MMC5983MA.cxx
 
+LPSDIR = $(APPDIR)/FlightComputer/StateMachine/sensors/LPS25
+SRCDIR = $(APPDIR)/FlightComputer/StateMachine/src
+MMCDIR += $(APPDIR)/FlightComputer/StateMachine/sensors/MMC5983MA
+
+CXXSRCS += $(SENSORSRC)
+CXXSRCS += $(MMCSRC)
+VPATH += $(LPSDIR)
+VPATH += $(MMCDIR)
+VPATH += $(SRCDIR)
 
 include $(APPDIR)/Application.mk
