@@ -10,8 +10,6 @@ bool LPS25::init(int i2cBus) {
     printf("[LPS25] Starting Sensor...\n");
 
     this->fd = i2cBus;
-
-//    int16_t ex = -1;
     uint8_t dev_id = 0x00;
 
     busRead(LPS25_WHOAMI, &dev_id, 1); // Read WHOIS register
@@ -30,7 +28,7 @@ bool LPS25::init(int i2cBus) {
 //    powerupData |= 0x80; // Power Up
 //    powerupData |= ODR_25; // 25Hz Data Read
 
-    busWrite(LPS25_CTRL1, 0xB0);
+    busWrite(LPS25_CTRL1, 0xD0); // Power on 25Hz output
 
     return true;
 }
@@ -106,7 +104,7 @@ float LPS25::getPressure() {
 
     uint8_t dataRead = 0x00;
 
-    uint32_t pData = 0;
+    int32_t pData = 0;
 
     // Check status register to see if pressure data is available
     busRead(LPS25_PRESSURE_H_REG, &dataRead, 1);
@@ -121,56 +119,25 @@ float LPS25::getPressure() {
     _pressure = (float) pData / 4096.0f;
 
     return _pressure;
-
-//
-//    busRead(LPS25_PRESSURE_OUT_XL, &pxl, 1);
-//    busRead(LPS25_PRESSURE_L_REG, &pl, 1);
-//    busRead(LPS25_PRESSURE_H_REG, &ph, 1);
-
-    return 0;
 }
-//
-//float LPS25::getPressure() {
-//
-//    int32_t rawPressure = readPressureRaw();
-//
-//    printf("[LPS25] Raw Pressure: %li\n", rawPressure);
-//
-//    float pressure = (float) rawPressure / 4096.0f;
-//
-//    auto * pressureBytes = (uint8_t *) &pressure;
-//    auto * rawPressureBytes = (uint8_t *) &rawPressure;
-//
-//    printf("Raw Bytes: \n");
-//    for(int i=0; i < sizeof(rawPressureBytes); i++) {
-//
-//        if(i == sizeof(pressureBytes) - 1) {
-//            printf("%#X\n", rawPressureBytes[i]);
-//        } else {
-//            printf("%#X | ", rawPressureBytes[i]);
-//        }
-//
-//    }
-//
-//    printf("Float Bytes: \n");
-//    for(int i=0; i < sizeof(pressureBytes); i++) {
-//
-//        if(i == sizeof(pressureBytes) - 1) {
-//            printf("%#X\n", pressureBytes[i]);
-//        } else {
-//            printf("%#X | ", pressureBytes[i]);
-//        }
-//
-//    }
-//
-//    printf("[LPS25] Pressure: %f", pressure);
-//
-//
-//    return static_cast<float>(rawPressure) / 4096.0f;
-//}
 
-double LPS25::getTemperature() {
-    return 0.0f;
+int16_t LPS25::getTemperature() {
+
+    uint8_t dataRead = 0x00;
+
+    int16_t tData = 0;
+
+    busRead(LPS25_TEMP_H_REG, &dataRead, 1);
+
+    tData = dataRead << 16; // MSB
+
+    busRead(LPS25_TEMP_L_REG, &dataRead, 1);
+
+    tData |= dataRead << 8; // LSB
+
+    _temperature = tData;
+
+    return _temperature;
 }
 
 /**

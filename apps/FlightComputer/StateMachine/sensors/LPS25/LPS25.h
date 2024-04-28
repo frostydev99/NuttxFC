@@ -33,7 +33,7 @@ public:
      */
     float getPressure();
 
-    double getTemperature();
+    int16_t getTemperature();
 
 private:
     int16_t busWrite(uint8_t reg, uint8_t  val);
@@ -70,6 +70,7 @@ private:
     constexpr static uint8_t LPS25_TEMP_H_REG = 0x2C;
 
     float _pressure = 0.0;
+    int16_t _temperature = 0.0;
 
     int fd = 0;
 };
