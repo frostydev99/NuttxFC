@@ -40,4 +40,8 @@ cd nuttx
 sudo make
 ```
 At this time, there is no way to DFU upload, so the binary must be manually uploaded to the flight computer. \
-If the RP2040 environment is configured properly, there will be a nuttx.uf2 file in the directory.
+If the RP2040 environment is configured properly, there will be a nuttx.uf2 file in the directory.\
+
+3. Setup CLion IDE
+The IDE can be downloaded from the following link: https://www.jetbrains.com/clion/download/ \
+Once downloaded, open the nuttx folder as a make project and the Flight Computer file structure will appear.
