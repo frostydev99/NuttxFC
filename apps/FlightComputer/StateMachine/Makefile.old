@@ -1,0 +1,56 @@
+############################################################################
+# apps/FlightComputer/StateMachine/Makefile
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.  The
+# ASF licenses this file to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance with the
+# License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+############################################################################
+
+include $(APPDIR)/Make.defs
+
+# FlightComputer StateMachine built-in application info
+
+PROGNAME = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_PROGNAME)
+PRIORITY = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_PRIORITY)
+STACKSIZE = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_STACKSIZE)
+MODULE = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE)
+
+# Directories
+LPSDIR = $(APPDIR)/FlightComputer/StateMachine/sensors/LPS25
+MMCDIR = $(APPDIR)/FlightComputer/StateMachine/sensors/MMC5983MA
+SRCDIR = $(APPDIR)/FlightComputer/StateMachine/FlightComputerSrc
+
+# Source files
+CSRCS =
+CXXSRCS = $(wildcard $(LPSDIR)/*.cxx) \
+          $(wildcard $(MMCDIR)/*.cxx) \
+					$(wildcard $(SRCDIR)/*.cxx)
+MAINSRC = $(wildcard $(SRCDIR)/*.cxx)
+
+# Include directories
+INCLUDES = -I$(APPDIR)/FlightComputer/StateMachine \
+           -I$(APPDIR)/FlightComputer/StateMachine/sensors \
+           -I$(APPDIR)/FlightComputer/StateMachine/sensors/LPS25 \
+           -I$(APPDIR)/FlightComputer/StateMachine/sensors/MMC5983MA
+
+# Set VPATH to the directories
+VPATH += $(LPSDIR)
+VPATH += $(MMCDIR)
+VPATH += $(SRCDIR)
+
+# Add the include paths to the compiler flags
+CXXFLAGS += $(INCLUDES)
+
+include $(APPDIR)/Application.mk

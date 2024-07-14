@@ -1,8 +1,10 @@
 #include <stdio.h>
 
 #include "sensors/LPS25/LPS25.h"
+#include "sensors/MMC5983MA/MMC5983MA.h"
 
 LPS25 barometer = LPS25();
+MMC5983MA mag = MMC5983MA();
 
 static int i2cBus = 0;
 
