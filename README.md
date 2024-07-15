@@ -25,6 +25,10 @@ source ~/.zshrc
 make
 ```
 
+3. Install picotool\
+Picotool exists as a built binary through the apt package manager, archlinux AUR or MacOS brew.
+If there is no pre-built package for your distribution, here is a link to the repository: https://github.com/raspberrypi/picotool
+
 ### Configure Flight Computer NuttX Environment
 1. Configure the build environment for the flight computer:
 ```bash

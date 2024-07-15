@@ -1,8 +1,5 @@
 #include "LPS25.h"
 
-#include "nuttx/i2c/i2c_master.h"
-
-
 LPS25::LPS25() = default;
 
 bool LPS25::init(int i2cBus) {
@@ -76,7 +73,7 @@ int16_t LPS25::busRead(uint8_t reg, uint8_t *val, int8_t len) {
                 .buffer = &reg,
                 .length = 1
             },
-            {
+                {
                 .frequency = 400000,
                 .addr = LPS25_ADDR,
                 .flags = I2C_M_READ,

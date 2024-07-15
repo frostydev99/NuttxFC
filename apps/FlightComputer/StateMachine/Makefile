@@ -1,26 +1,52 @@
+############################################################################
+# apps/FlightComputer/StateMachine/Makefile
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.  The
+# ASF licenses this file to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance with the
+# License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+############################################################################
+
 include $(APPDIR)/Make.defs
+
+# FlightComputer StateMachine built-in application info
 
 PROGNAME = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_PROGNAME)
 PRIORITY = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_PRIORITY)
 STACKSIZE = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE_STACKSIZE)
 MODULE = $(CONFIG_FLIGHTCOMPUTER_STATEMACHINE)
 
-# State Machine
+# Directories
+BASEDIR = $(APPDIR)/FlightComputer/StateMachine
+SRCDIR = $(BASEDIR)/src
+SENSORSDIR = $(BASEDIR)/sensors
 
-MAINSRC = StateMachine.cxx
+# Source files
+CSRCS =
+CXXSRCS = $(wildcard $(SRCDIR)/*.cxx) \
+          $(wildcard $(SENSORSDIR)/**/*.cxx)
 
-# Include Sensors and Build
-SENSORSRC = sensors/LPS25/LPS25.cxx
-MMCSRC = sensors/MMC5983MA/MMC5983MA.cxx
+# Include directories
+INCLUDES = -I$(BASEDIR) \
+           -I$(SRCDIR) \
+           -I$(SENSORSDIR)
 
-LPSDIR = $(APPDIR)/FlightComputer/StateMachine/sensors/LPS25
-SRCDIR = $(APPDIR)/FlightComputer/StateMachine/src
-MMCDIR += $(APPDIR)/FlightComputer/StateMachine/sensors/MMC5983MA
-
-CXXSRCS += $(SENSORSRC)
-CXXSRCS += $(MMCSRC)
-VPATH += $(LPSDIR)
-VPATH += $(MMCDIR)
+# Set VPATH to the directories
 VPATH += $(SRCDIR)
+VPATH += $(SENSORSDIR)
+
+# Add the include paths to the compiler flags
+CXXFLAGS += $(INCLUDES)
 
 include $(APPDIR)/Application.mk

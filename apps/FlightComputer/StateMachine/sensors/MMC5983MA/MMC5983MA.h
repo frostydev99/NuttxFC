@@ -11,17 +11,16 @@
 #include <nuttx/i2c/i2c_master.h>
 #include <cstring>
 
-
-enum MagBandwidth {
-    bw100 = 0x00, // 8ms measurement time
-    bw200 = 0x01, // 4ms measurement time
-    bw400 = 0x02, // 2ms measurement time
-    bw800 = 0x03, // 0.5ms measurement time
-};
-
 class MMC5983MA {
 
 public:
+
+    enum MagBandwidth {
+        bw100 = 0x00, // 8ms measurement time
+        bw200 = 0x01, // 4ms measurement time
+        bw400 = 0x02, // 2ms measurement time
+        bw800 = 0x03, // 0.5ms measurement time
+    };
 
     MMC5983MA();
 
