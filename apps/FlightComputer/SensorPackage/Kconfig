@@ -1,0 +1,24 @@
+config FLIGHTCOMPUTER_SENSORPACKAGE
+        tristate "Flight Computer Sensor Package"
+        default y
+        ---help---
+                Enable the Flight Computer
+
+if FLIGHTCOMPUTER_SENSORPACKAGE
+
+config FLIGHTCOMPUTER_SENSORPACKAGE_PROGNAME
+        string "Program name"
+        default "FC_SensorPackage"
+        ---help---
+                This is the name of the program that will be used when the NSH ELF
+                program is installed.
+
+config FLIGHTCOMPUTER_SENSORPACKAGE_PRIORITY
+        int "Sensosr Package task priority"
+        default 100
+
+config FLIGHTCOMPUTER_SENSORPACKAGE_STACKSIZE
+        int "Sensor Package stack size"
+        default 2048
+
+endif

@@ -6,5 +6,6 @@
 #
 
 menu "Flight Computer"
+source "/Users/frostydev/workspace/NuttxFC/apps/FlightComputer/SensorPackage/Kconfig"
 source "/Users/frostydev/workspace/NuttxFC/apps/FlightComputer/StateMachine/Kconfig"
 endmenu # Flight Computer
