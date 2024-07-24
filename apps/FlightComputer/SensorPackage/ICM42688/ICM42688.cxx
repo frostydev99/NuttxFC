@@ -22,7 +22,7 @@ int16_t ICM42688::busWrite(uint8_t reg, uint8_t val) {
 
     struct i2c_msg_s i2cMsg {
             .frequency = 400000,
-            .addr = LPS25_ADDR,
+            .addr = ICM42688_ADDR,
             .flags = 0,
             .buffer = txBuffer,
             .length = 2
@@ -48,14 +48,14 @@ int16_t ICM42688::busRead(uint8_t reg, uint8_t *val, int8_t len) {
     struct i2c_msg_s i2cMsg[2] = {
             {
                     .frequency = 400000,
-                    .addr = LPS25_ADDR,
+                    .addr = ICM42688_ADDR,
                     .flags = 0,
                     .buffer = &reg,
                     .length = 1
             },
             {
                     .frequency = 400000,
-                    .addr = LPS25_ADDR,
+                    .addr = ICM42688_ADDR,
                     .flags = I2C_M_READ,
                     .buffer = val,
                     .length = len

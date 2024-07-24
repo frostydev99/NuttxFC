@@ -37,11 +37,11 @@ cd nuttx
 ./tools/configure.sh -l ./CustomBoards/HPRC_FC/configs/debug/
 
 # If using MacOS
-./tools/configre.sh -m ./CustomBoards/HPRC_FC/configs/debug/
+./tools/configre.sh -m CustomBoards/HPRC_FC/configs/debug/
 ```
 2. Build Flight Computer
 ```
-sudo make
+make
 ```
 At this time, there is no way to DFU upload, so the binary must be manually uploaded to the flight computer. \
 If the RP2040 environment is configured properly, there will be a nuttx.uf2 file in the directory.\

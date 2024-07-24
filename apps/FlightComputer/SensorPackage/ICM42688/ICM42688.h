@@ -55,6 +55,8 @@ private:
 
     int fd = 0;
 
+    constexpr static uint8_t ICM42688_ADDR = 0x34; // i2c address
+
     constexpr static uint8_t ACCEL_ODR_VAL = 0x06; //1kHz
     constexpr static uint8_t ACCEL_FSR_VAL = 0x00; // +-16g
 
